@@ -1,12 +1,10 @@
-
-/* styles.css — minimal, clean, responsive */
+/* styles.css (replacement) — clean + no-crop banner */
 :root{
   --bg:#0b0b10;
   --panel:#11131a;
   --ink:#e9ecf1;
   --muted:#b9c0cc;
-  --accent:#9b8cff; /* soft violet */
-  --accent-2:#67d6ff; /* aurora blue */
+  --accent:#9b8cff;
   --link:#e6f0ff;
   --shadow:0 10px 30px rgba(0,0,0,.35);
 }
@@ -15,57 +13,51 @@
 html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,'Noto Sans',sans-serif;line-height:1.55}
 
 a{color:var(--link);text-decoration:none}
-a:hover{opacity:.9;text-decoration:underline}
+a:hover{text-decoration:underline;opacity:.95}
 
+/* ---------- Header / Banner (NO CROP) ---------- */
 .header{
   position:relative;
   width:100%;
-  min-height:50vh;
-  display:grid;
-  place-items:center;
+  min-height:clamp(380px, 56vh, 720px);
   overflow:hidden;
-  background:#0f1220;
+  background:#000;
 }
+
 .header img.banner{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
-  object-fit:contain;         /* show the whole image (no cropping) */
-  object-position:center;     /* center it nicely */
-  background:#000;            /* subtle letterbox fill if needed */
+  object-fit:contain;       /* show entire image */
+  object-position:center;   /* centered nicely */
+  background:#000;
   filter:contrast(1.05) saturate(1.05) brightness(.95);
 }
-/* Make header a bit taller so the full banner has room on mobile */
-.header{ min-height:clamp(360px, 55vh, 640px); }
 
-/* Scale the copyright badge to a nice size */
-.footer-image{
-  display:block;
-  margin:0 auto;
-  max-width:180px;    /* adjust this if you want bigger/smaller */
-  height:auto;
-  opacity:.95;
-}
 .header .overlay{
-  position:relative;
+  position:absolute;
+  inset:0;
   z-index:2;
+  display:grid;
+  place-items:center;
   text-align:center;
   padding:3rem 1rem;
-  backdrop-filter:saturate(140%) blur(0px);
 }
+
 .title{
   font-size:clamp(2rem, 3.8vw, 3.2rem);
-  font-weight:700;
-  letter-spacing:.3px;
+  font-weight:800;
+  letter-spacing:.2px;
   text-shadow:0 6px 30px rgba(0,0,0,.55);
 }
 .subtitle{
-  margin-top:.4rem;
+  margin-top:.45rem;
   font-size:clamp(1rem, 1.6vw, 1.25rem);
   color:var(--muted);
 }
 
+/* ---------- Nav ---------- */
 .nav{
   width:100%;
   background:rgba(15,18,32,.7);
@@ -91,6 +83,7 @@ a:hover{opacity:.9;text-decoration:underline}
 }
 .nav a.active{border-color:var(--accent); box-shadow:0 0 0 2px rgba(155,140,255,.25) inset}
 
+/* ---------- Buttons ---------- */
 .buttons{
   margin:1.5rem auto 0;
   display:flex;
@@ -111,9 +104,8 @@ a:hover{opacity:.9;text-decoration:underline}
 }
 .button:hover{transform:translateY(-1px)}
 .button .icon{font-size:1.1rem}
-.button.youtube{border-color:#ff4b4b66}
-.button.suno{border-color:#ffd16666}
 
+/* ---------- Main ---------- */
 .main{
   max-width:1100px;
   margin:2rem auto;
@@ -139,6 +131,7 @@ a:hover{opacity:.9;text-decoration:underline}
   border:1px solid rgba(255,255,255,.08);
 }
 
+/* ---------- Footer ---------- */
 .footer{
   border-top:1px solid rgba(255,255,255,.08);
   padding:1.5rem 1rem 4rem;
@@ -147,9 +140,11 @@ a:hover{opacity:.9;text-decoration:underline}
   gap:.6rem;
   background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
 }
-.footer img{
-  max-height:44px;
-  width:auto;
-  opacity:.92;
+.footer-image{
+  display:block;
+  margin:0 auto;
+  max-width:200px;
+  height:auto;
+  opacity:.96;
 }
 .footer .small{color:var(--muted);font-size:.95rem}
