@@ -21,7 +21,7 @@ html,body{
 a{color:var(--link); text-decoration:none}
 a:hover{opacity:.95; text-decoration:underline}
 
-/* ----- Header / Banner (NO CROP) ----- */
+/* ----- Header / Banner (NO CROP on small/medium, FILL on large) ----- */
 .header{
   position:relative; width:100%;
   min-height:clamp(380px, 56vh, 720px);
@@ -35,6 +35,13 @@ a:hover{opacity:.95; text-decoration:underline}
   object-position:center;
   background:#000;
   filter:contrast(1.05) saturate(1.05) brightness(.95);
+}
+/* Big screens: dramatic fill */
+@media (min-width:1100px){
+  .header img.banner{
+    object-fit:cover;
+    object-position:center 80%;
+  }
 }
 
 /* Overlay container (we position CTAs inside) */
@@ -55,13 +62,13 @@ a:hover{opacity:.95; text-decoration:underline}
 .header .button:hover{ transform:translateY(-1px) }
 .header .button .icon{ font-size:1.1rem }
 
-/* Desktop placement: bottom corners, away from your script logo */
+/* Desktop placement: bottom corners, away from the script logo */
 .header .cta-left,
 .header .cta-right{
-  position:absolute; bottom:18px;
+  position:absolute; bottom:26px;
 }
-.header .cta-left{ left:24px; }
-.header .cta-right{ right:24px; }
+.header .cta-left{ left:40px; }
+.header .cta-right{ right:40px; }
 
 /* ----- Top Navigation ----- */
 .nav{
@@ -106,13 +113,30 @@ a:hover{opacity:.95; text-decoration:underline}
   display:grid; place-items:center; gap:.6rem;
   background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
 }
+/* Default (Home uses this—see body.home below) */
 .footer-image{
   display:block; margin:0 auto;
-  max-width:200px; height:auto; opacity:.96;
+  max-width:180px; height:auto; opacity:.96;
 }
 .footer .small{ color:var(--muted); font-size:.95rem }
 
-/* ----- Responsive: mobile behavior ----- */
+/* ----- Page-specific footer scaling ----- */
+/* Home keeps bigger badge via .home on <body> */
+body.home .footer-image{ max-width:180px; }
+
+/* Non-home pages smaller by default */
+body:not(.home) .footer-image{ max-width:120px; opacity:.9; }
+
+/* Tablets */
+@media (max-width:900px){
+  body:not(.home) .footer-image{ max-width:100px; }
+}
+/* Phones */
+@media (max-width:600px){
+  body:not(.home) .footer-image{ max-width:80px; }
+}
+
+/* ----- Responsive: mobile behavior for CTAs ----- */
 @media (max-width:700px){
   /* Stack CTAs centered near bottom so they never cross your script name */
   .header .overlay{
@@ -123,126 +147,14 @@ a:hover{opacity:.95; text-decoration:underline}
     position:static; margin:6px 6px 0;
   }
 }
-/* Hide the big overlay title/subtitle on every page (we use the script logo in the art) */
+
+/* ----- GLOBAL OVERRIDES (hide stray big titles/subtitles on non-home pages) ----- */
 .header .overlay .title,
 .header .overlay .subtitle{
   display:none !important;
 }
-
-/* Reposition buttons on pages that still use the ".buttons" wrapper */
-.header .overlay .buttons{
-  position:absolute;
-  left:40px;
-  right:40px;
-  bottom:26px;
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-}
-
-/* Make those buttons match the home style */
-.header .overlay .buttons a{
-  background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.2));
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-  backdrop-filter:saturate(140%) blur(2px);
-}
-
-/* Mobile/tablet: stack centered so nothing overlaps your script name */
-@media (max-width: 700px){
-  .header .overlay .buttons{
-    position:static;
-    padding:1rem;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-end;
-    gap:8px;
-  }
-}
-/* ==== GLOBAL OVERRIDES FOR NON-HOME PAGES ==== */
-
-/* Make sure overlay behaves the same on every page */
-.header .overlay{
-  position:absolute !important;
-  inset:0 !important;
-  display:block !important;
-  padding:0 !important;
-  z-index:2 !important;
-}
-
-/* Hide any big title/subtitle no matter the class/tag */
 .header .overlay h1,
-.header .overlay .title,
-.header .overlay p,
-.header .overlay .subtitle{
-  display:none !important;
-}
-
-/* Reposition the old ".buttons" wrapper to corners */
-.header .overlay .buttons{
-  position:absolute !important;
-  left:40px !important;
-  right:40px !important;
-  bottom:26px !important;
-  display:flex !important;
-  justify-content:space-between !important;
-  gap:12px !important;
-}
-
-/* Make those buttons match the home look */
-.header .overlay .buttons a{
-  background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.2)) !important;
-  border:1px solid rgba(255,255,255,.25) !important;
-  box-shadow:0 10px 30px rgba(0,0,0,.35) !important;
-  backdrop-filter:saturate(140%) blur(2px) !important;
-}
-
-/* Mobile/tablet: stack centered */
-@media (max-width: 700px){
-  .header .overlay .buttons{
-    position:static !important;
-    padding:1rem !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:flex-end !important;
-    gap:8px !important;
-  }
-}
-/* Smaller copyright badge on non-home pages */
-body:not(.home) .footer-image {
-  max-width: 120px;   /* desktop/laptop size */
-  opacity: 0.9;
-}
-
-/* Extra shrinking on tablets */
-@media (max-width: 900px) {
-  body:not(.home) .footer-image {
-    max-width: 100px;
-  }
-}
-
-/* Extra shrinking on phones */
-@media (max-width: 600px) {
-  body:not(.home) .footer-image {
-    max-width: 80px;
-  }
-}
-/* Smaller copyright badge on NON-home pages */
-body:not(.home) .footer-image{
-  max-width:120px !important;  /* desktop/laptop */
-  opacity:.9;
-}
-
-/* Tablets */
-@media (max-width: 900px){
-  body:not(.home) .footer-image{
-    max-width:100px !important;
-  }
-}
-
-/* Phones */
-@media (max-width: 600px){
-  body:not(.home) .footer-image{
-    max-width:80px !important;
-  }
+.header .overlay p{
+  /* If other pages still had old markup, this prevents big blocks */
+  max-height:0 !important; overflow:hidden !important; margin:0 !important; padding:0 !important;
 }
