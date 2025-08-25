@@ -1,4 +1,5 @@
-/* styles.css (replacement) — clean + no-crop banner */
+/* styles.css — CrystalAowlan.com */
+
 :root{
   --bg:#0b0b10;
   --panel:#11131a;
@@ -9,55 +10,60 @@
   --shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
+/* Base */
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,'Noto Sans',sans-serif;line-height:1.55}
-
-a{color:var(--link);text-decoration:none}
-a:hover{text-decoration:underline;opacity:.95}
-
-/* ---------- Header / Banner (NO CROP) ---------- */
-.header{
-  position:relative;
-  width:100%;
-  min-height:clamp(380px, 56vh, 720px);
-  overflow:hidden;
-  background:#000;
+html,body{
+  margin:0; padding:0;
+  background:var(--bg); color:var(--ink);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,'Noto Sans',sans-serif;
+  line-height:1.55;
 }
+a{color:var(--link); text-decoration:none}
+a:hover{opacity:.95; text-decoration:underline}
 
+/* ----- Header / Banner (NO CROP) ----- */
+.header{
+  position:relative; width:100%;
+  min-height:clamp(380px, 56vh, 720px);
+  background:#000;               /* letterbox fill for contain */
+  overflow:hidden;
+}
 .header img.banner{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:contain;       /* show entire image */
-  object-position:center;   /* centered nicely */
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:contain;             /* show entire image */
+  object-position:center;
   background:#000;
   filter:contrast(1.05) saturate(1.05) brightness(.95);
 }
 
+/* Overlay container (we position CTAs inside) */
 .header .overlay{
-  position:absolute;
-  inset:0;
-  z-index:2;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  padding:3rem 1rem;
+  position:absolute; inset:0; z-index:2;
 }
 
-.title{
-  font-size:clamp(2rem, 3.8vw, 3.2rem);
-  font-weight:800;
-  letter-spacing:.2px;
-  text-shadow:0 6px 30px rgba(0,0,0,.55);
+/* CTA buttons in the banner */
+.header .button{
+  display:inline-flex; align-items:center; gap:.55rem;
+  padding:.7rem 1rem; border-radius:12px;
+  background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.2));
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:var(--shadow);
+  backdrop-filter:saturate(140%) blur(2px);
+  transition:transform .1s ease;
 }
-.subtitle{
-  margin-top:.45rem;
-  font-size:clamp(1rem, 1.6vw, 1.25rem);
-  color:var(--muted);
-}
+.header .button:hover{ transform:translateY(-1px) }
+.header .button .icon{ font-size:1.1rem }
 
-/* ---------- Nav ---------- */
+/* Desktop placement: bottom corners, away from your script logo */
+.header .cta-left,
+.header .cta-right{
+  position:absolute; bottom:18px;
+}
+.header .cta-left{ left:24px; }
+.header .cta-right{ right:24px; }
+
+/* ----- Top Navigation ----- */
 .nav{
   width:100%;
   background:rgba(15,18,32,.7);
@@ -66,51 +72,18 @@ a:hover{text-decoration:underline;opacity:.95}
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 .nav-inner{
-  max-width:1100px;
-  margin:0 auto;
-  padding:.6rem 1rem;
-  display:flex;
-  gap:1rem;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:center;
+  max-width:1100px; margin:0 auto; padding:.6rem 1rem;
+  display:flex; gap:1rem; flex-wrap:wrap; align-items:center; justify-content:center;
 }
 .nav a{
-  padding:.45rem .9rem;
-  border-radius:999px;
+  padding:.45rem .9rem; border-radius:999px;
   background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
   border:1px solid rgba(255,255,255,.08);
 }
-.nav a.active{border-color:var(--accent); box-shadow:0 0 0 2px rgba(155,140,255,.25) inset}
+.nav a.active{ border-color:var(--accent); box-shadow:0 0 0 2px rgba(155,140,255,.25) inset }
 
-/* ---------- Buttons ---------- */
-.buttons{
-  margin:1.5rem auto 0;
-  display:flex;
-  gap:.8rem;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.button{
-  display:inline-flex;
-  align-items:center;
-  gap:.55rem;
-  padding:.7rem 1rem;
-  border-radius:12px;
-  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-  border:1px solid rgba(255,255,255,.1);
-  box-shadow:var(--shadow);
-  transition:transform .1s ease;
-}
-.button:hover{transform:translateY(-1px)}
-.button .icon{font-size:1.1rem}
-
-/* ---------- Main ---------- */
-.main{
-  max-width:1100px;
-  margin:2rem auto;
-  padding:0 1rem 3rem;
-}
+/* ----- Main Content ----- */
+.main{ max-width:1100px; margin:2rem auto; padding:0 1rem 3rem; }
 .card{
   background:var(--panel);
   border:1px solid rgba(255,255,255,.08);
@@ -118,33 +91,35 @@ a:hover{text-decoration:underline;opacity:.95}
   padding:1rem 1.1rem;
   box-shadow:var(--shadow);
 }
-.grid{
-  display:grid;
-  gap:1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
+
+/* Simple gallery grid */
+.grid{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
 .gallery img{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.08);
+  width:100%; height:260px; object-fit:cover;
+  border-radius:12px; border:1px solid rgba(255,255,255,.08);
 }
 
-/* ---------- Footer ---------- */
+/* ----- Footer ----- */
 .footer{
   border-top:1px solid rgba(255,255,255,.08);
   padding:1.5rem 1rem 4rem;
-  display:grid;
-  place-items:center;
-  gap:.6rem;
+  display:grid; place-items:center; gap:.6rem;
   background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
 }
 .footer-image{
-  display:block;
-  margin:0 auto;
-  max-width:200px;
-  height:auto;
-  opacity:.96;
+  display:block; margin:0 auto;
+  max-width:200px; height:auto; opacity:.96;
 }
-.footer .small{color:var(--muted);font-size:.95rem}
+.footer .small{ color:var(--muted); font-size:.95rem }
+
+/* ----- Responsive: mobile behavior ----- */
+@media (max-width:700px){
+  /* Stack CTAs centered near bottom so they never cross your script name */
+  .header .overlay{
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+    gap:8px; padding:1rem;
+  }
+  .header .cta-left, .header .cta-right{
+    position:static; margin:6px 6px 0;
+  }
+}
