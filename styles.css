@@ -227,3 +227,22 @@ body:not(.home) .footer-image {
     max-width: 80px;
   }
 }
+/* Smaller copyright badge on NON-home pages */
+body:not(.home) .footer-image{
+  max-width:120px !important;  /* desktop/laptop */
+  opacity:.9;
+}
+
+/* Tablets */
+@media (max-width: 900px){
+  body:not(.home) .footer-image{
+    max-width:100px !important;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px){
+  body:not(.home) .footer-image{
+    max-width:80px !important;
+  }
+}
