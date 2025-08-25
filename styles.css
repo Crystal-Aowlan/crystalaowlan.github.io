@@ -208,3 +208,22 @@ a:hover{opacity:.95; text-decoration:underline}
     gap:8px !important;
   }
 }
+/* Smaller copyright badge on non-home pages */
+body:not(.home) .footer-image {
+  max-width: 120px;   /* desktop/laptop size */
+  opacity: 0.9;
+}
+
+/* Extra shrinking on tablets */
+@media (max-width: 900px) {
+  body:not(.home) .footer-image {
+    max-width: 100px;
+  }
+}
+
+/* Extra shrinking on phones */
+@media (max-width: 600px) {
+  body:not(.home) .footer-image {
+    max-width: 80px;
+  }
+}
