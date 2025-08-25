@@ -36,11 +36,11 @@ a:hover{opacity:.95; text-decoration:underline}
   background:#000;
   filter:contrast(1.05) saturate(1.05) brightness(.95);
 }
-/* Big screens: dramatic fill */
+/* Keep NO-CROP on large screens too */
 @media (min-width:1100px){
   .header img.banner{
-    object-fit:cover;
-    object-position:center 80%;
+    object-fit:contain;
+    object-position:center;
   }
 }
 
