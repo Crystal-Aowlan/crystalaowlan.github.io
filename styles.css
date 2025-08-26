@@ -158,3 +158,12 @@ body:not(.home) .footer-image{ max-width:120px; opacity:.9; }
   /* If other pages still had old markup, this prevents big blocks */
   max-height:0 !important; overflow:hidden !important; margin:0 !important; padding:0 !important;
 }
+/* Make videos styled like images in galleries */
+.gallery img,
+.gallery video{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.08);
+}
