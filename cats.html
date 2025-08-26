@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cats — Crystal Aowlan</title>
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
   <header class="header" role="banner">
@@ -32,11 +32,16 @@
   <main class="main">
     <section class="card">
       <h2>Shadow &amp; Indi</h2>
-      <p>Because all good studios have supervisors. Add photos and a short bio for each cat here.</p>
+      <p>Upload photos and short videos to <code>images/cats/</code>. Everything appears here automatically.</p>
       <ul>
-        <li><strong>Shadow</strong> — Blue Bengal, born 3 Sept 2024. Rosetted and Glitter coated; enjoys evening walks and quality control.</li>
-        <li><strong>Indi</strong> — Russian Blue × British Blue Shorthair, with Nebelung type, semi longerhair crimpled coat; born 15 Sept 2024. Prefers dignified observation.</li>
+        <li><strong>Shadow</strong> — Blue Bengal, glitter coat, enjoys evening walks &amp; QA.</li>
+        <li><strong>Indi</strong> — Russian Blue × British Blue, semi-longhair floof; dignified observer.</li>
       </ul>
+    </section>
+
+    <section class="card">
+      <h3>Gallery</h3>
+      <div class="grid gallery" id="cats-grid"></div>
     </section>
   </main>
 
@@ -44,5 +49,15 @@
     <img src="images/copyright-badge.png" alt="Copyright badge" class="footer-image">
     <div class="small">© Crystal Aowlan 2025. All Rights Reserved.</div>
   </footer>
+
+  <script src="gallery.js"></script>
+  <script>
+    loadGallery({
+      user: 'Crystal-Aowlan',
+      repo: 'crystalaowlan.github.io',
+      path: 'images/cats',
+      targetSelector: '#cats-grid'
+    });
+  </script>
 </body>
 </html>
